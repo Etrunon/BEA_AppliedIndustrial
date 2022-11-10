@@ -1,0 +1,21 @@
+Progetto 8
+
+The project aims to provide empirical evidence on the relationship between (static) allocative
+efficiency and trade liberalization episodes, highlighting how institutional frictions at the province
+level interact with trade reforms.
+
+Quindi devo far vedere le differenze tra zone regolate e zone non regolate? 
+Tra il prima e il dopo l'introduzione/abrogazione di una regolamentazione?
+Trovare un modo di misurare l'institutional friction e metterlo nelle regressioni
+
+within industry allocative efficiency = covariance of size and productivity
+
+
+VARIABLES:
+- size
+- productivity
+- (factors to compute productivity)
+
+
+
+// devo tenere le aziende che rimangono nel dataset e in più tenere anche il random sample di micro imprese?
