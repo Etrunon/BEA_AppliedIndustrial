@@ -1,4 +1,6 @@
+** You have to run this file before, as it defines all shared variables
 // import 00Boilerplate.do
+clear all
 
 use "$data_original", replace
 
@@ -14,3 +16,5 @@ sum $SIC
 
 // Output to be used when converting to latex
 outreg2 using "table1.xls", excel sum(log) replace auto(2)
+
+save "$data_first_cleaning", replace
