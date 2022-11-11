@@ -15,6 +15,6 @@ sum $VES
 sum $SIC
 
 // Output to be used when converting to latex
-outreg2 using "table1.xls", excel sum(log) replace auto(2)
+outreg2 using "$result/01_tableVariables.xls", excel sum(log) replace auto(2)
 
-save "$data_first_cleaning", replace
+save "$data_01Cleaning", replace

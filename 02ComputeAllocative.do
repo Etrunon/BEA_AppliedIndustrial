@@ -2,7 +2,7 @@
 // import 00Boilerplate.do
 clear all
 
-use "$data_first_cleaning", replace
+use "$data_01Cleaning", replace
 
 // This file is used to compute and add the allocative efficiency by each sector and year.
 // As sector the most specific code is used from the main07Act classification
@@ -38,3 +38,5 @@ drop averageFirmSizeBySectorYear ///
         averageLnProdBySectorYear ///
         emplDiffWithAverageSector ///
         prodDiffWithAverageSector
+
+save "$data_02ComputeAllocative", replace

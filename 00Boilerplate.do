@@ -9,8 +9,8 @@ global result "$path/results"
 
 global data_original "$path/panel_2000_2012_tariff_finale.dta"
 
-global data_first_cleaning "$result/first_cleaning.dta"
-
+global data_01Cleaning "$result/01Cleaning.dta"
+global data_02ComputeAllocative "$result/02ComputeAllocative.dta"
 
 // Define variables
 global VES_sectors "main07Act4digit main07Act3digit main07Act2digit main07Act1digit"
