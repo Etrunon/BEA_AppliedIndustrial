@@ -3,15 +3,16 @@
 clear all
 set more off
 
-*** Define Local paths
+// Define Local paths
 global path  "/home/etrunon/Documents/UniBea/13Industrial/BEA_AppliedIndustrial"
+global result "$path/results"
+
 global data_original "$path/panel_2000_2012_tariff_finale.dta"
-global result "$path/result"
 
-** Open up the dataset
-cd "`path'"
+global data_first_cleaning "$result/first_cleaning.dta"
 
-** Define variables
+
+// Define variables
 global VES_sectors "main07Act4digit main07Act3digit main07Act2digit main07Act1digit"
 global VES_styl "idTax year rev ln_tfp empl ln_lp"
 
@@ -26,3 +27,6 @@ global SIC $SIC_land $SIC_legal $SIC_burocracy $SIC_education
 
 // All variables to be used in a single batch
 global all_var $VES $SIC
+
+// Open the correct workspace
+cd "$path"
