@@ -1,3 +1,8 @@
 *
 !*.do
 !README
+
+# Ignore every results but the png exports
+!results
+results/*
+!results/*.png
