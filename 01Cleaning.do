@@ -17,4 +17,23 @@ sum $SIC
 // Output to be used when converting to latex
 outreg2 using "$result/01_tableVariables.xls", excel sum(log) replace auto(2)
 
+// Apply all the labels
+label variable idTax "Firm Id"
+label variable year "Year"
+label variable main07Act1digit "Sector code 1-digit"
+label variable main07Act2digit "Sector code 2-digit"
+label variable main07Act3digit "Sector code 3-digit"
+label variable main07Act4digit "Sector code 4-digit"
+label variable rev "Revenue"
+label variable ln_tfp "Log of Total Factor Productivity"
+label variable empl "Employee"
+label variable ln_lp "Log of Labour Productivity"
+label variable land_access "Land Access index"
+label variable legal_institutions "Legal institution index"
+label variable land_expropriation "Land Expropriation index"
+label variable time_bureaucracy_spending "Time spent due to bureocracy"
+label variable time_inspection_hours "Hours spent due to inspections"
+label variable labor_general "Index of quality perception of general education"
+label variable labor_soft_vocational "Index of quality perception of vocational education"
+
 save "$data_01Cleaning", replace

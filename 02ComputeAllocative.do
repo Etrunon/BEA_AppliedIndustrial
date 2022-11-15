@@ -39,4 +39,7 @@ drop averageFirmSizeBySectorYear ///
         emplDiffWithAverageSector ///
         prodDiffWithAverageSector
 
+label variable covarForFirm "Covariance at firm level (over sector and year)"
+label variable covAllEfficiencyBySectorYear "Allocative efficiency by sector and year"
+
 save "$data_02ComputeAllocative", replace
