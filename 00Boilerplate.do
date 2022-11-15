@@ -14,7 +14,7 @@ global data_02ComputeAllocative "$result/02ComputeAllocative.dta"
 
 // Define variables
 global VES_sectors "main07Act4digit main07Act3digit main07Act2digit main07Act1digit"
-global VES_styl "idTax year rev ln_tfp empl ln_lp"
+global VES_styl "idTax year rev ln_tfp empl ln_lp province"
 
 global VES $VES_sectors $VES_styl
 
