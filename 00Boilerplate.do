@@ -3,6 +3,11 @@
 clear all
 set more off
 
+// Installs for map plotting
+// ssc install spmap
+// ssc install shp2dta
+// ssc install mif2dta 
+
 // Define Local paths
 global path  "/home/etrunon/Documents/UniBea/13Industrial/BEA_AppliedIndustrial"
 global result "$path/results"
