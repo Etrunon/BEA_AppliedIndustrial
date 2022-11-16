@@ -6,3 +6,6 @@
 !results
 results/*
 !results/*.png
+
+!/map_source
+!/map_source/*
