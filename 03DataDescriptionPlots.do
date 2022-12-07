@@ -40,6 +40,17 @@ collapse averageProductivity, by(province year)
 graph box averageProductivity, over(year) title("Average Province Productivity Over Years")
 graph export "$result/03_AverageProvinceProductivityOverYears.png", replace 
 
+// Average firm size over year and provinces
+use "$data_02ComputeAllocative", replace
+
+egen empl_mean = mean(empl), by(year province) 
+label variable empl_mean "Empl mean over years over province"
+collapse empl_mean, by(province year)
+
+graph bar empl_mean, over(province) over(year) title("Boxplot Firm Size Over Years Over Provinces")
+graph export "$result/03_BoxplotFirmSizeOverYearsOverProvinces.png", replace 
+
+
 //// Boxplot of labour productivity over the years
 //// Pretty bad, unreadable
 //egen ln_lp_mean = mean(ln_lp), by(year) 

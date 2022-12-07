@@ -23,12 +23,12 @@ global VES_styl "idTax year rev ln_tfp empl ln_lp province"
 
 global VES $VES_sectors $VES_styl
 
-global SIC_land "land_access land_expropriation"
-global SIC_legal "legal_institutions"
-global SIC_burocracy "time_bureaucracy_spending time_inspection_hours" 
-global SIC_education "labor_general labor_soft_vocational" 
+global PCI_land "land_access land_expropriation"
+global PCI_legal "legal_institutions"
+global PCI_burocracy "time_bureaucracy_spending time_inspection_hours" 
+global PCI_education "labor_general labor_soft_vocational" 
 
-global SIC $SIC_land $SIC_legal $SIC_burocracy $SIC_education
+global SIC $PCI_land $PCI_legal $PCI_burocracy $PCI_education
 
 // All variables to be used in a single batch
 global all_var $VES $SIC
