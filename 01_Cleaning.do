@@ -7,9 +7,15 @@ use "$data_original", replace
 * It's pruning time
 ** Drop all other columns/variables
 keep $all_var
-** Drop observations with no SIC measurements and without LP
+** Drop observations with no PCI measurements, without LP and TFP
 drop if year < 2007 | year > 2012
-drop if ln_lp ==.
+drop if ln_lp == .
+
+drop if ln_tfp == .
+count if province == .
+drop if province == .
+count if main07Act2digit == .
+
 
 sum $VES
 sum $SIC
@@ -35,5 +41,6 @@ label variable time_bureaucracy_spending "Time spent due to bureocracy"
 label variable time_inspection_hours "Hours spent due to inspections"
 label variable labor_general "Index of quality perception of general education"
 label variable labor_soft_vocational "Index of quality perception of vocational education"
+label variable export "Whether the firm exports or not"
 
 save "$data_01Cleaning", replace
