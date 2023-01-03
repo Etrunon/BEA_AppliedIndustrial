@@ -6,16 +6,16 @@ use "$data_02ComputeAllocative", replace
 
 // scatter covAllEfficiencyBySectorYear main07Act1digit year
 
-outreg2 using "$result/03_tableVariables.xls", excel sum(log) replace auto(2)
+outreg2 using "$result/02/tableVariables.xls", excel sum(log) replace auto(2)
 
 //Boxplot firm size over years
 graph box empl, over(year) title("Boxplot firm size over years")
-graph export "$result/03_BoxplotFirmSizeOverYears.png", replace 
+graph export "$result/02/BoxplotFirmSizeOverYears.png", replace 
 
 egen empl_mean = mean(empl), by(year) 
 label variable empl_mean "Empl mean over years"
 graph bar empl_mean, over(year) title("Boxplot Average firm size over years")
-graph export "$result/03_BoxplotAverageFirmSizeOverYears.png", replace 
+graph export "$result/02/BoxplotAverageFirmSizeOverYears.png", replace 
 
 // Compute average Employee size over all the sectors (2digits)
 use "$data_02ComputeAllocative", replace
@@ -31,14 +31,14 @@ use "$data_02ComputeAllocative", replace
 egen ln_lp_mean = mean(ln_lp), by(year) 
 label variable ln_lp_mean "ln_lp mean over years"
 graph bar ln_lp_mean, over(year) title("Boxplot Average productivity over years")
-graph export "$result/03_AverageProductivityOverYears.png", replace 
+graph export "$result/02/AverageProductivityOverYears.png", replace 
 
 // Average productivity over all the provinces
 use "$data_02ComputeAllocative", replace
 bysort province year: egen averageProductivity=mean(empl) 
 collapse averageProductivity, by(province year)
 graph box averageProductivity, over(year) title("Average Province Productivity Over Years")
-graph export "$result/03_AverageProvinceProductivityOverYears.png", replace 
+graph export "$result/02/AverageProvinceProductivityOverYears.png", replace 
 
 // Average firm size over year and provinces
 use "$data_02ComputeAllocative", replace
@@ -48,7 +48,7 @@ label variable empl_mean "Empl mean over years over province"
 collapse empl_mean, by(province year)
 
 graph bar empl_mean, over(province) over(year) title("Boxplot Firm Size Over Years Over Provinces")
-graph export "$result/03_BoxplotFirmSizeOverYearsOverProvinces.png", replace 
+graph export "$result/02/BoxplotFirmSizeOverYearsOverProvinces.png", replace 
 
 
 //// Boxplot of labour productivity over the years
