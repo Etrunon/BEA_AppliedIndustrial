@@ -77,4 +77,11 @@ label variable pci_labor_soft_vocational        "PCI\_EducationVocational"
 label variable pci_time_bureaucracy_spending    "PCI\_TimeSpentBurocracy"
 label variable employee                         "NumberOfEmployee"
 
+label define sector_2digit 10 "Food" 11 "Beverages" 12 "Tobacco" 13 "Textiles" 14 "Wearing apparel" 15 "Leather" 16 "Wood" ///
+    17 "Paper" 18 "Printing and Publishing" 19 "Coke and Refined petroleum" 20 "Chemicals" 21 "Pharmaceuticals and Medicines" ///
+    22 "Rubber and Plastics" 23 "Non-metallic minerals" 24 "Basic metals" 25 "Fabricated metals" 26 "Electronic products" ///
+    27 "Electrical equipment" 28 "Machinery and equipment" 29 "Motor vehicles and Trailers" 30 "Other transport equipment" ///
+    31 "Furniture" 32 "Other manufacturing" 33 "Repair and Installation"
+label values sector_2digit sector_2digit
+
 save "$data_03ComputeAllocative", replace
