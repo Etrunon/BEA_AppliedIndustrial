@@ -12,10 +12,10 @@ xtset idTax year
 
 * Shares
 egen empl_spt = sum(empl), by(main07Act2digit province year)
-gen share_empl_ispt = empl    / empl_spt
+gen share_empl_ispt = empl / empl_spt
 
 egen rev_spt = sum(rev), by(main07Act2digit province year)
-gen share_rev_ispt = rev    / rev_spt
+gen share_rev_ispt = rev / rev_spt
 
 *Aggregate Productivity
 
@@ -51,4 +51,30 @@ egen py=group(province year)
 
 hhi rev, by (main07Act2digit year)
 
-collapse cov_ln_lp_spt cov_ln_tfp_spt hhi land_expropriation labor_general export empl, by (main07Act2digit province year)
+collapse cov_ln_lp_spt cov_ln_tfp_spt hhi land_access land_expropriation labor_general labor_soft_vocational time_bureaucracy_spending  export empl, by (main07Act2digit province year)
+
+rename cov_ln_lp_spt              allocEff_ln_lp_spt
+rename cov_ln_tfp_spt             allocEff_ln_tfp_spt
+rename main07Act2digit            sector_2digit
+rename hhi                        hhi_marketConcentration
+rename export                     share_exportingFirm_spt
+rename land_access                pci_land_access
+rename land_expropriation         pci_land_expropriation
+rename labor_general              pci_labor_general
+rename labor_soft_vocational      pci_labor_soft_vocational
+rename time_bureaucracy_spending  pci_time_bureaucracy_spending
+rename empl                       employee
+
+label variable allocEff_ln_lp_spt               "AllocativeEfficiencyLP_{spt}"
+label variable allocEff_ln_tfp_spt              "AllocativeEfficiencyTFP_{spt}"
+label variable sector_2digit                    "Sector"
+label variable hhi_marketConcentration          "HHI\_index"
+label variable share_exportingFirm_spt          "Share\_ExportingFirms_{spt}"
+label variable pci_land_access                  "PCI\_LandAccess"
+label variable pci_land_expropriation           "PCI\_LandExpropriation"
+label variable pci_labor_general                "PCI\_EducationGeneral"
+label variable pci_labor_soft_vocational        "PCI\_EducationVocational"
+label variable pci_time_bureaucracy_spending    "PCI\_TimeSpentBurocracy"
+label variable employee                         "NumberOfEmployee"
+
+save "$data_03ComputeAllocative", replace
