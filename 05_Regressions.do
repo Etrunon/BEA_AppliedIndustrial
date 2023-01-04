@@ -7,17 +7,46 @@ local allocative "allocEff_ln_lp_spt allocEff_ln_tfp_spt "
 collapse `pci' `ves' `allocative', by(province year)
 
 pwcorr `pci' `ves' `allocative', star(.05)
+outreg2 using "$result/05/CorrelationMatrix.tex", replace ctitle(Correlation Matrix)
 
 // Set the dataset as panel on province and year
 xtset province year
 
 // Regress model with LP
+reg allocEff_ln_lp_spt pci_land_access
+outreg2 using "$result/05/ModelLP.tex", replace ctitle(Land)
+reg allocEff_ln_lp_spt pci_labor_general  
+outreg2 using "$result/05/ModelLP.tex", append ctitle(Education)
+reg allocEff_ln_lp_spt pci_time_bureaucracy_spending  
+outreg2 using "$result/05/ModelLP.tex", append ctitle(Bureaucracy)
+
+reg allocEff_ln_lp_spt pci_land_access pci_labor_general pci_time_bureaucracy_spending  
+outreg2 using "$result/05/ModelLP.tex", append ctitle(Simple model)
+
 reg allocEff_ln_lp_spt pci_land_access pci_land_expropriation pci_labor_general pci_time_bureaucracy_spending hhi_marketConcentration employee 
+
+outreg2 using "$result/05/ModelLP.tex", append ctitle(Complete)
+
 estat vif
 
 
+
+
 // Regress model with TFP
-reg allocEff_ln_tfp_spt pci_land_access pci_labor_general pci_time_bureaucracy_spending hhi_marketConcentration employee
+reg allocEff_ln_tfp_spt pci_land_access
+outreg2 using "$result/05/ModelTFP.tex", replace ctitle(Land)
+reg allocEff_ln_tfp_spt pci_labor_general  
+outreg2 using "$result/05/ModelTFP.tex", append ctitle(Education)
+reg allocEff_ln_tfp_spt pci_time_bureaucracy_spending  
+outreg2 using "$result/05/ModelTFP.tex", append ctitle(Bureaucracy)
+
+reg allocEff_ln_tfp_spt pci_land_access pci_labor_general pci_time_bureaucracy_spending  
+outreg2 using "$result/05/ModelTFP.tex", append ctitle(Simple model)
+
+reg allocEff_ln_tfp_spt pci_land_access pci_land_expropriation pci_labor_general pci_time_bureaucracy_spending hhi_marketConcentration employee 
+
+outreg2 using "$result/05/ModelTFP.tex", append ctitle(Complete)
+
 estat vif
 
 
@@ -80,3 +109,49 @@ foreach alloc in `allocative'{
 //
 //
 //graph twoway scatter allocEff_ln_tfp_spt employee if sector==11
+
+// ----------------------------------------------------------------------------------------------------------------------------
+// Il blocco qui sotto va a disegnare dei grafici che cercano la correlazione tra dimensione dell'azienda e percezione
+// di facilità di accesso ai terreni. 
+// L'intuizione era che più un azienda è grande e meno difficoltà avrà a ottenere terreni, perchè avrà persone dedicate esclusivamente 
+// a quell'attività.
+// L'intuizione non è completamente corretta, vale solo in alcuni anni. Probabilmente bisognerebbe scorporare l'influenza della 
+// crisi del 2009 e altri fattori.
+forvalues anno = 2007 (1) 2012{
+    use "$data_03ComputeAllocative", clear
+    
+    keep if year == `anno'
+
+    collapse employee pci_land_access, by (province)
+
+    graph twoway (scatter employee pci_land_access, mlabel(province) ) (lfit employee pci_land_access), ///
+    ytitle(employee) xtitle(pci_land_access) title(mean pci_land_access and employee by province)  legend(off) scheme(s2mono)  graphregion(color(white))
+
+    graph export "$result/05/Scatter_correlationLandAccessEmployee_`anno'.png", replace
+}
+
+// ----------------------------------------------------------------------------------------------------------------------------
+// Il blocco qui sotto va a disegnare dei grafici che cercano la correlazione tra dimensione dell'azienda e percezione
+// di problemi con la burocrazia. 
+// L'intuizione era che più un azienda è grande e meno difficoltà avrà a gestire la burocrazia, perchè avrà persone dedicate esclusivamente 
+// a quell'attività.
+use "$data_03ComputeAllocative", clear
+collapse employee pci_time_bureaucracy_spending, by (province)
+
+graph twoway (scatter employee pci_time_bureaucracy_spending, mlabel(province) ) (lfit employee pci_time_bureaucracy_spending), ///
+ytitle(employee) xtitle(pci_time_bureaucracy_spending) title(mean pci_time_bureaucracy_spending and employee by province)  legend(off) scheme(s2mono)  graphregion(color(white))
+
+graph export "$result/05/Scatter_correlationBureauocracyEmployee_AllPeriod.png", replace
+
+forvalues anno = 2007 (1) 2012{
+    use "$data_03ComputeAllocative", clear
+    
+    keep if year == `anno'
+
+    collapse employee pci_time_bureaucracy_spending, by (province)
+
+    graph twoway (scatter employee pci_time_bureaucracy_spending, mlabel(province) ) (lfit employee pci_time_bureaucracy_spending), ///
+    ytitle(employee) xtitle(pci_time_bureaucracy_spending) title(mean pci_time_bureaucracy_spending and employee by province)  legend(off) scheme(s2mono)  graphregion(color(white))
+
+    graph export "$result/05/Scatter_correlationBureauocracyEmployee_`anno'.png", replace
+}
