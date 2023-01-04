@@ -1,5 +1,7 @@
 use "$data_01Cleaning", clear
 
+drop if province == 105
+
 xtset idTax year
 
 **COrevRIANCE AT SECTOR-PROVINCE LEVEL
@@ -83,5 +85,16 @@ label define sector_2digit 10 "Food" 11 "Beverages" 12 "Tobacco" 13 "Textiles" 1
     27 "Electrical equipment" 28 "Machinery and equipment" 29 "Motor vehicles and Trailers" 30 "Other transport equipment" ///
     31 "Furniture" 32 "Other manufacturing" 33 "Repair and Installation"
 label values sector_2digit sector_2digit
+
+label define province 301 "Lai Chau" 203 "Cao Bang" 601 "Kon Tum" 707 "Binh Phuoc" 103 "Hai Phong" 201 "Ha Giang" ///
+ 111 "Ha Nam" 101 "Ha Noi" 225 "Quang Ninh" 217 "Phu Tho" 823 "Ca Mau" 211 "Tuyen Quang" 209 "Lang Son"  ///
+ 117 "Ninh Binh" 503 "Quang Nam" 207 "Bac Kan" 401 "Thanh Hoa" 113 "Nam Dinh" 305 "Hoa Binh" 107 "Hai Duong"  ///
+ 813 "Kien Giang" 109 "Hung Yen" 511 "Khanh Hoa" 715 "Binh Thuan" 509 "Phu Yen" 821 "Bac Lieu" 405 "Ha Tinh"  ///
+ 403 "Nghe An" 215 "Thai Nguyen" 603 "Gia Lai" 106 "Bac Ninh" 407 "Quang Binh" 115 "Thai Binh" 607 "Lam Dong"  ///
+ 709 "Tay Ninh" 811 "Ben Tre" 701 "HCMC" 213 "Yen Bai" 815 "Can Tho" 303 "Son La" 717 "BRVT" 817 "Tra Vinh"  ///
+ 805 "An Giang" 409 "Quang Tri" 705 "Ninh Thuan" 505 "Quang Ngai" 801 "Long An" 104 "Hau Giang" 605 "Dak Lak"  ///
+ 205 "Lao Cai" 807 "Tien Giang" 221 "Bac Giang" 713 "Dong Nai" 501 "Da Nang" 803 "Dong Thap" 711 "Binh Duong"  ///
+ 507 "Soc Trang" 819 "Binh Dinh" 411 "TT-Hue" 809 "Vinh Long"
+label values province province
 
 save "$data_03ComputeAllocative", replace
