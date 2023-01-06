@@ -24,8 +24,10 @@ reg allocEff_ln_lp_spt pci_land_access pci_labor_general pci_time_bureaucracy_sp
 outreg2 using "$result/05/ModelLP.tex", append ctitle(Simple model)
 
 reg allocEff_ln_lp_spt pci_land_access pci_land_expropriation pci_labor_general pci_time_bureaucracy_spending hhi_marketConcentration employee 
+outreg2 using "$result/05/ModelLP.tex", append ctitle(Employee)
 
-outreg2 using "$result/05/ModelLP.tex", append ctitle(Complete)
+reg allocEff_ln_lp_spt pci_land_access pci_land_expropriation pci_labor_general pci_time_bureaucracy_spending hhi_marketConcentration employee share_exportingFirm_spt 
+outreg2 using "$result/05/ModelLP.tex", append ctitle(Export)
 
 estat vif
 
@@ -44,7 +46,9 @@ reg allocEff_ln_tfp_spt pci_land_access pci_labor_general pci_time_bureaucracy_s
 outreg2 using "$result/05/ModelTFP.tex", append ctitle(Simple model)
 
 reg allocEff_ln_tfp_spt pci_land_access pci_land_expropriation pci_labor_general pci_time_bureaucracy_spending hhi_marketConcentration employee 
+outreg2 using "$result/05/ModelTFP.tex", append ctitle(Complete)
 
+reg allocEff_ln_tfp_spt pci_land_access pci_land_expropriation pci_labor_general pci_time_bureaucracy_spending hhi_marketConcentration employee share_exportingFirm_spt
 outreg2 using "$result/05/ModelTFP.tex", append ctitle(Complete)
 
 estat vif
