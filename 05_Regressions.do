@@ -26,7 +26,7 @@ outreg2 using "$result/05/ModelLP.tex", append ctitle(Simple model)
 reg allocEff_ln_lp_spt pci_land_access pci_land_expropriation pci_labor_general pci_time_bureaucracy_spending hhi_marketConcentration employee 
 outreg2 using "$result/05/ModelLP.tex", append ctitle(Employee)
 
-reg allocEff_ln_lp_spt pci_land_access pci_land_expropriation pci_labor_general pci_time_bureaucracy_spending hhi_marketConcentration employee share_exportingFirm_spt 
+reg allocEff_ln_lp_spt pci_land_access pci_land_expropriation pci_labor_general pci_labor_soft_vocational pci_time_bureaucracy_spending hhi_marketConcentration employee share_exportingFirm_spt 
 outreg2 using "$result/05/ModelLP.tex", append ctitle(Export)
 
 estat vif
@@ -48,7 +48,7 @@ outreg2 using "$result/05/ModelTFP.tex", append ctitle(Simple model)
 reg allocEff_ln_tfp_spt pci_land_access pci_land_expropriation pci_labor_general pci_time_bureaucracy_spending hhi_marketConcentration employee 
 outreg2 using "$result/05/ModelTFP.tex", append ctitle(Complete)
 
-reg allocEff_ln_tfp_spt pci_land_access pci_land_expropriation pci_labor_general pci_time_bureaucracy_spending hhi_marketConcentration employee share_exportingFirm_spt
+reg allocEff_ln_tfp_spt pci_land_access pci_land_expropriation pci_labor_general pci_labor_soft_vocational pci_time_bureaucracy_spending hhi_marketConcentration employee share_exportingFirm_spt
 outreg2 using "$result/05/ModelTFP.tex", append ctitle(Complete)
 
 estat vif
@@ -159,3 +159,29 @@ forvalues anno = 2007 (1) 2012{
 
     graph export "$result/05/Scatter_correlationBureauocracyEmployee_`anno'.png", replace
 }
+
+
+
+// Paper images below
+
+use "$data_03ComputeAllocative", clear
+
+collapse pci_labor_soft_vocational allocEff_ln_lp_spt allocEff_ln_tfp_spt pci_land_access, by (province)
+
+twoway (scatter allocEff_ln_lp_spt pci_labor_soft_vocational, mlabel(province) ) (lfit allocEff_ln_lp_spt pci_labor_soft_vocational), ///
+    ytitle(All. Eff. LP) xtitle(Quality of Vocational Education) ///
+    title(LP All.Eff. based and Vocational Education)  legend(off) scheme(s2mono)  graphregion(color(white))
+
+graph export "$result/05/05_Paper_Scatter_LP_Vocational_byProvince.png", replace
+
+twoway (scatter allocEff_ln_tfp_spt pci_labor_soft_vocational, mlabel(province) ) (lfit allocEff_ln_tfp_spt pci_labor_soft_vocational), ///
+    ytitle(All. Eff. TFP) xtitle(Quality of Vocational Education) ///
+    title(TFP All.Eff. and Vocational Education)  legend(off) scheme(s2mono)  graphregion(color(white))
+
+graph export "$result/05/05_Paper_Scatter_TFP_Vocational_byProvince.png", replace
+
+twoway (scatter allocEff_ln_lp_spt pci_land_access, mlabel(province) ) (lfit allocEff_ln_lp_spt pci_land_access), ///
+    ytitle(All. Eff. LP) xtitle(Quality of Land Access) ///
+    title(LP All.Eff. based and Land Access)  legend(off) scheme(s2mono)  graphregion(color(white))
+
+graph export "$result/05/05_Paper_Scatter_LP_LandAccess_byProvince.png", replace
